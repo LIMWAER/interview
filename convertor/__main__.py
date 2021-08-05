@@ -1,11 +1,15 @@
 import argparse
-import re
 import string
+
+from convertor.decode_convertor import Decoder
+from convertor.encode_convertor import Encoder
+
 KEY_FILE = 'key'
 
 
 def prepare_text_source(text: str):
-    return re.sub(string.punctuation, '', text.lower())
+    # reworked because of stacking quantifiers
+    return text.lower().translate(str.maketrans('', '', string.punctuation))
 
 
 def parse_args():
@@ -16,12 +20,13 @@ def parse_args():
     return parser.parse_args()
 
 
-def decode():
-    # use a prepare_text_source function for preparing!
-    # TODO: need to implement this functionality [4]
-    print('Opps... The decode function is not implemented')
+def decode(text=parse_args().source_text):
+    converted_text = Decoder(KEY_FILE).convert_text(text)
+    print(converted_text)
+    return converted_text
 
 
-def encode():
-    # TODO: need to implement this functionality [5]
-    print('Opps... The encode function is not implemented')
+def encode(text=parse_args().source_text):
+    converted_text = Encoder(KEY_FILE).convert_text(prepare_text_source(text)
+    print(converted_text)
+    return converted_text
