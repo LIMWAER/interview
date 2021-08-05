@@ -1,21 +1,28 @@
 import os
 
+from typing import Dict
+from collections import OrderedDict
+
 from convertor.abstract_base_convertor import AbstractFileConvertor
 import glob
 
 
 class Decoder(AbstractFileConvertor):
     @staticmethod
-    def _file_to_dict(filename) -> dict[str, str]:
-        # TODO: need to implement this functionality [1]
-        raise NotImplementedError('Not implemented [1]')
+    def _file_to_dict(filename) -> OrderedDict[str, str]:
+        d = {}
+        with open(filename) as file:
+            for line in file:
+                key, *value = line.split(':')
+                d[value[0].split(',')[0].lstrip().rstrip('\n')] = key.lower()
+        return OrderedDict(sorted(d.items(),key=lambda x: len(x[0]), reverse=True))
 
     def convert_text(self, input_text: str) -> str:
         for original, replace in self._latter_mapper.items():
             input_text = input_text.replace(original, replace, -1)
         return input_text
 
-    def _create_map(self, file: str, **kwargs) -> dict[str, str]:
+    def _create_map(self, file: str, **kwargs) -> Dict[str, str]:
         assert file
         return self._file_to_dict(file)
 
