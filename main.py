@@ -3,9 +3,9 @@ import os
 from pathlib import Path
 
 import convertor
-from convertor.decode_convertor import Decoder
+from convertor.convertors import Decoder
 from convertor.trash_generator import Trasher
-from convertor.encode_convertor import Encoder
+from convertor.convertors import Encoder
 
 ROOT_PATH = Path(__file__).parent
 KEY_FILE = Path(os.path.dirname(convertor.__file__)) / 'key'

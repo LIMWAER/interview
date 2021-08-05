@@ -1,8 +1,8 @@
 import argparse
 import string
 
-from convertor.decode_convertor import Decoder
-from convertor.encode_convertor import Encoder
+from convertor.convertors import Decoder
+from convertor.convertors import Encoder
 
 KEY_FILE = 'key'
 
@@ -27,6 +27,6 @@ def decode(text=parse_args().source_text):
 
 
 def encode(text=parse_args().source_text):
-    converted_text = Encoder(KEY_FILE).convert_text(prepare_text_source(text)
+    converted_text = Encoder(KEY_FILE).convert_text(prepare_text_source(text))
     print(converted_text)
     return converted_text
