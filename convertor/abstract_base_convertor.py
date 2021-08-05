@@ -6,7 +6,6 @@ from collections import OrderedDict
 from typing import Dict
 
 
-
 class AbstractFileConvertor(ABC):
     """Abstract base - interface for 1337 encoder / decoder
     """
@@ -62,7 +61,7 @@ class BaseConvertor(AbstractFileConvertor):
     def _use_right_dict(filename: str) -> OrderedDict[str, str]:
         raise NotImplementedError
 
-    def file_to_dict(self, filename, **kwargs) -> OrderedDict[str, str]:
+    def file_to_dict(self, filename) -> OrderedDict[str, str]:
         d = {}
         with open(filename) as file:
             for line in file:

@@ -22,11 +22,9 @@ def parse_args():
 
 def decode(text=parse_args().source_text):
     converted_text = Decoder(KEY_FILE).convert_text(text)
-    print(converted_text)
     return converted_text
 
 
 def encode(text=parse_args().source_text):
     converted_text = Encoder(KEY_FILE).convert_text(prepare_text_source(text))
-    print(converted_text)
     return converted_text
